@@ -1,6 +1,7 @@
 using Xunit;
 using MontyHall;
 using System;
+using System.Linq;
 
 namespace tests.MontyHall
 {
@@ -10,13 +11,14 @@ namespace tests.MontyHall
         public void UnitTest1()
         {
             // arrange
-            var chosenDoor = new RandomPrizeGenerator();
+            var prizes = new IBehindTheDoor[] {new Car(), new Goat(), new Goat()};
+            
 
             // act
-            
-
+            var randomResult1 = prizes.OrderBy(_ => Guid.NewGuid());
+            var randomResult2 = prizes.OrderBy(_ => Guid.NewGuid()); 
             // assert
-            
+            Assert.NotEqual(randomResult1, randomResult2);
         }
     }
 }
