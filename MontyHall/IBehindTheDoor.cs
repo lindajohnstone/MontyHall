@@ -2,6 +2,7 @@ namespace MontyHall
 {
     public interface IBehindTheDoor
     {
-        public bool DoorState();
+        public bool IsPrize();
+
     }
 }

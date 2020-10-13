@@ -8,36 +8,37 @@ namespace tests.MontyHall
     public class MontyHallTests
     {
         [Fact]
-        public void ShouldTestDoorInitialisation()
+        public void Should_Test_Initialise_Door()
         {
             // arrange
-            var prizes = new IBehindTheDoor[] {new Car(), new Goat(), new Goat()};
+            var doorInit = new DoorInit();
 
             // act
-            var randomResult1 = prizes.OrderBy(_ => Guid.NewGuid());
-            var randomResult2 = prizes.OrderBy(_ => Guid.NewGuid()); 
+            var randomResult1 = doorInit.Init();
+            var randomResult2 = doorInit.Init();
+
             // assert
-            Assert.NotEqual(randomResult1, randomResult2);
+            Assert.Equal(randomResult1, randomResult2);
         }
 
         [Fact]
-        public void ShouldTestCar_DoorState()
+        public void Should_Test_Car_IsPrize()
         {
             // arrange
             var car = new Car();
             // act
-            var result = car.DoorState();
+            var result = car.IsPrize();
             // assert
             Assert.True(result);
         }
 
         [Fact]
-        public void ShouldTestGoat_DoorState()
+        public void Should_Test_Goat_IsPrize()
         {
             // arrange
             var goat = new Goat();
             // act
-            var result = goat.DoorState();
+            var result = goat.IsPrize();
             // assert
             Assert.False(result);
         }
@@ -45,13 +46,13 @@ namespace tests.MontyHall
         [Theory]
         [InlineData(0, true)]
         [InlineData(1, false)]
-        public void ShouldTestIfCarChosen(int chosenDoor, bool expected)
+        public void Should_Test_If_Car_Chosen(int chosenDoor, bool expected)
         {
             // arrange
             var doors = new Doors();
             var prizes = doors.InitialiseDoors();
             // act
-            var result = doors.IsCarChosen(chosenDoor);
+            var result = doors.IsPrize(chosenDoor);
             // assert
             Assert.Equal(expected, result);
         }

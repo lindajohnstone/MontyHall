@@ -2,7 +2,7 @@ namespace MontyHall
 {
     public class Monty : IBehindTheDoor
     {
-        public bool DoorState()
+        public bool IsPrize()
         {
             throw new System.NotImplementedException();
         }

@@ -2,7 +2,7 @@ namespace MontyHall
 {
     public class Goat : IBehindTheDoor
     {
-        public bool DoorState()
+        public bool IsPrize()
         {
             return false;
         }

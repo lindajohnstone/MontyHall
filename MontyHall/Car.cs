@@ -2,9 +2,8 @@ namespace MontyHall
 {
     public class Car : IBehindTheDoor
     {
-        public bool DoorState()
+        public bool IsPrize()
         {
-            // car door is the winning door
             return true;
         }
     }
