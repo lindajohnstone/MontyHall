@@ -48,9 +48,10 @@ namespace tests.MontyHall
         public void ShouldTestIfCarChosen(int chosenDoor, bool expected)
         {
             // arrange
-            var door = new Doors();
+            var doors = new Doors();
+            var prizes = doors.InitialiseDoors();
             // act
-            var result = door.IsCarChosen(chosenDoor);
+            var result = doors.IsCarChosen(chosenDoor);
             // assert
             Assert.Equal(expected, result);
         }
