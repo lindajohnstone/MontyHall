@@ -4,7 +4,7 @@ namespace MontyHall
     {
         public bool IsPrize()
         {
-            throw new System.NotImplementedException();
+            return false;
         }
     }
 }

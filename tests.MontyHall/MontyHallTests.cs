@@ -56,5 +56,18 @@ namespace tests.MontyHall
             // assert
             Assert.Equal(expected, result);
         }
+        [Fact]
+        public void Should_Test_MontysDoor()
+        {
+            // arrange
+            var doors = new Doors();
+            var prizes = doors.InitialiseDoors();
+            var chosenDoor = 1;
+            // act
+            var result = doors.MontysDoor(chosenDoor);
+
+            // assert
+            Assert.NotEqual(chosenDoor, result);
+        }
     }
 }

@@ -23,5 +23,24 @@ namespace MontyHall
         {
             return prizes[chosenDoor].IsPrize(); // TODO: validation pending if asking for input         
         }
+
+        public int MontysDoor(int chosenDoor)
+        {
+            // MontysDoor != chosenDoor;
+            // MontysDoor.IsPrize is always false
+            // 1/ check
+            var MontysDoor = 0; 
+            for (int i = 0; i < prizes.Length; i++)
+            {
+                if (i != chosenDoor)
+                {
+                    if (!prizes[i].IsPrize())
+                    {
+                        MontysDoor = i;
+                    }
+                }
+            }
+            return MontysDoor;
+        }
     }
 }
