@@ -66,17 +66,18 @@ namespace tests.MontyHall
             // assert
             Assert.NotEqual(chosenDoor, result);
         }
-        [Fact]
-        public void Should_Test_ChoosePlayerDoor()
+        [Theory]
+        [InlineData(0, 1, 2)]
+        [InlineData(0, 2, 1)]
+        [InlineData(2, 0, 1)]
+        public void Should_Test_SwitchDoor(int chosenDoor, int montysDoor, int expected)
         {
             // arrange
             var doors = new Doors();
-            var chosenDoor = 0;
-            var montysDoor = 1;
             // act
             var result = doors.SwitchDoor(chosenDoor, montysDoor);
             // assert
-            Assert.NotNull(result);
+            Assert.Equal(expected, result);
         }
     }
 }
