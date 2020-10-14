@@ -12,11 +12,9 @@ namespace tests.MontyHall
         {
             // arrange
             var doorInit = new DoorInit();
-
             // act
             var randomResult1 = doorInit.Init();
             var randomResult2 = doorInit.Init();
-
             // assert
             Assert.Equal(randomResult1, randomResult2);
         }
@@ -57,17 +55,28 @@ namespace tests.MontyHall
             Assert.Equal(expected, result);
         }
         [Fact]
-        public void Should_Test_MontysDoor()
+        public void Should_Test_ChooseMontysDoor()
         {
             // arrange
             var doors = new Doors();
             var prizes = doors.InitialiseDoors();
             var chosenDoor = 1;
             // act
-            var result = doors.MontysDoor(chosenDoor);
-
+            var result = doors.ChooseMontysDoor(chosenDoor);
             // assert
             Assert.NotEqual(chosenDoor, result);
+        }
+        [Fact]
+        public void Should_Test_ChoosePlayerDoor()
+        {
+            // arrange
+            var doors = new Doors();
+            var chosenDoor = 0;
+            var montysDoor = 1;
+            // act
+            var result = doors.SwitchDoor(chosenDoor, montysDoor);
+            // assert
+            Assert.NotNull(result);
         }
     }
 }

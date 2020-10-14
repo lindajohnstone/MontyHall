@@ -12,10 +12,10 @@ namespace MontyHall
             return prizes.OrderBy(_ => Guid.NewGuid()).ToArray();
         }
 
-        public int ChooseDoor()
+        public int ChoosePlayerDoor()
         {
             Random rand = new Random();
-            var chosenDoor = rand.Next(0, 3);
+            var chosenDoor = rand.Next(0, 3);// TODO: for scaleability, add constant min & max
             return chosenDoor;
         }
 
@@ -24,23 +24,32 @@ namespace MontyHall
             return prizes[chosenDoor].IsPrize(); // TODO: validation pending if asking for input         
         }
 
-        public int MontysDoor(int chosenDoor)
+        public int ChooseMontysDoor(int chosenDoor)
         {
-            // MontysDoor != chosenDoor;
-            // MontysDoor.IsPrize is always false
-            // 1/ check
-            var MontysDoor = 0; 
+            var montysDoor = 0; 
             for (int i = 0; i < prizes.Length; i++)
             {
-                if (i != chosenDoor)
+                if (i != chosenDoor || !prizes[i].IsPrize())
                 {
-                    if (!prizes[i].IsPrize())
-                    {
-                        MontysDoor = i;
-                    }
+                    montysDoor = i;
+                    break;
                 }
             }
-            return MontysDoor;
+            return montysDoor;
+        }
+
+        public object SwitchDoor(int chosenDoor, int montysDoor)
+        {
+            var switchDoor = 0; 
+            for (int i = 0; i < 3; i++) // TODO: for scaleability, use constant max from ChoosePlayerDoor
+            {
+                if (i != chosenDoor && i != montysDoor)
+                {
+                    switchDoor = i;
+                    break;
+                }
+            }
+            return switchDoor;
         }
     }
 }
