@@ -79,5 +79,17 @@ namespace tests.MontyHall
             // assert
             Assert.Equal(expected, result);
         }
+        [Fact]
+        public void Should_Test_DecideWhichDoor()
+        {
+            // arrange
+            var doors = new Doors();
+            var chosenDoor = 0;
+            var switchDoor = 1;
+            // act
+            var result = doors.DecideWhichDoor(chosenDoor, switchDoor);
+            // assert
+            Assert.NotEqual(chosenDoor, switchDoor);
+        }
     }
 }
