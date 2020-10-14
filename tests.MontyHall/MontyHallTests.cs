@@ -2,6 +2,7 @@ using Xunit;
 using MontyHall;
 using System;
 using System.Linq;
+using Moq;
 
 namespace tests.MontyHall
 {
@@ -47,7 +48,7 @@ namespace tests.MontyHall
         public void Should_Test_If_Car_Chosen(int chosenDoor, bool expected)
         {
             // arrange
-            var doors = new Doors();
+            var doors = new Doors(new StubInput());
             var prizes = doors.InitialiseDoors();
             // act
             var result = doors.IsPrize(chosenDoor);
@@ -58,7 +59,7 @@ namespace tests.MontyHall
         public void Should_Test_ChooseMontysDoor()
         {
             // arrange
-            var doors = new Doors();
+            var doors = new Doors(new StubInput());
             var prizes = doors.InitialiseDoors();
             var chosenDoor = 1;
             // act
@@ -73,9 +74,9 @@ namespace tests.MontyHall
         public void Should_Test_SwitchDoor(int chosenDoor, int montysDoor, int expected)
         {
             // arrange
-            var doors = new Doors();
+            var doors = new Doors(new StubInput());
             // act
-            var result = doors.SwitchDoor(chosenDoor, montysDoor);
+            var result = doors.UnopenedDoor(chosenDoor, montysDoor);
             // assert
             Assert.Equal(expected, result);
         }
@@ -83,13 +84,14 @@ namespace tests.MontyHall
         public void Should_Test_DecideWhichDoor()
         {
             // arrange
-            var doors = new Doors();
+            var doors = new Doors(new StubInput());
             var chosenDoor = 0;
-            var switchDoor = 1;
+            var unopenedDoor = 1;
+            var userInput = "y";
             // act
-            var result = doors.DecideWhichDoor(chosenDoor, switchDoor);
+            var result = doors.DecideWhichDoor(chosenDoor, unopenedDoor);
             // assert
-            Assert.NotEqual(chosenDoor, switchDoor);
+            //Assert.True(chosenDoor);
         }
     }
 }
