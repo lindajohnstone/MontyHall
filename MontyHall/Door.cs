@@ -11,6 +11,8 @@ namespace MontyHall
         {
             _input = input;
         }
+        private int min = 0;
+        private int max = 3;
         public IBehindTheDoor[] InitialiseDoors()
         {
             prizes = new IBehindTheDoor[] {new Car(), new Goat(), new Goat()};
@@ -20,7 +22,7 @@ namespace MontyHall
         public int ChoosePlayerDoor()
         {
             Random rand = new Random();
-            var chosenDoor = rand.Next(0, 3);// TODO: for scaleability, add field min & max
+            var chosenDoor = rand.Next(min, max);
             return chosenDoor;
         }
 
@@ -46,7 +48,7 @@ namespace MontyHall
         public int UnopenedDoor(int chosenDoor, int montysDoor)
         {
             var unopenedDoor = 0; 
-            for (int i = 0; i < prizes.Length; i++)
+            for (int i = 0; i < max; i++)
             {
                 if (i != chosenDoor && i != montysDoor)
                 {
@@ -57,13 +59,13 @@ namespace MontyHall
             return unopenedDoor;
         }
 
-        public int DecideWhichDoor(int chosenDoor, int switchDoor)
+        public bool DecideWhichDoor(int chosenDoor, int switchDoor)
         {
             Console.WriteLine("Would you like to keep your original door or switch to the unopened door?");
             Console.WriteLine("Enter 'y' to keep or 'n' to switch.");
             var userInput = _input.ReadLine();
-            if (userInput == "y") return chosenDoor; 
-            return switchDoor;
+            if (userInput == "y") return true; 
+            return false;
         }
     }
 }

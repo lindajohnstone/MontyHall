@@ -80,18 +80,17 @@ namespace tests.MontyHall
             // assert
             Assert.Equal(expected, result);
         }
-        [Fact]
-        public void Should_Test_DecideWhichDoor()
+        [Theory]
+        [InlineData(new [] {0,1}, "y", true)]
+        [InlineData(new [] {0,1}, "n", false)]
+        public void Should_Test_UserInput_ChosenDoor_DecideWhichDoor(int[] door, string userInput, bool expected)
         {
             // arrange
-            var doors = new Doors(new StubInput());
-            var chosenDoor = 0;
-            var unopenedDoor = 1;
-            var userInput = "y";
+            var decideDoors = new DecideDoors(new StubInput());
             // act
-            var result = doors.DecideWhichDoor(chosenDoor, unopenedDoor);
+            var result = decideDoors.DecideWhichDoor(door[0], door[1], userInput);
             // assert
-            //Assert.True(chosenDoor);
+            Assert.Equal(result, expected);
         }
     }
 }
