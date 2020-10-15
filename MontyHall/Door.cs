@@ -7,9 +7,12 @@ namespace MontyHall
     {
         IBehindTheDoor[] prizes; 
         IInput _input;
-        public Doors(IInput input)
+        private readonly IOutput _output;
+
+        public Doors(IInput input, IOutput output)
         {
             _input = input;
+            _output = output;
         }
         private int min = 0;
         private int max = 3;

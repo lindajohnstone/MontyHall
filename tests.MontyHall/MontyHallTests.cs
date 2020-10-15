@@ -48,7 +48,8 @@ namespace tests.MontyHall
         public void Should_Test_If_Car_Chosen(int chosenDoor, bool expected)
         {
             // arrange
-            var doors = new Doors(new StubInput());
+            //var doorOutput =  new StubOutput();
+            var doors = new Doors(new StubInput(), new StubOutput());
             var prizes = doors.InitialiseDoors();
             // act
             var result = doors.IsPrize(chosenDoor);
@@ -59,7 +60,7 @@ namespace tests.MontyHall
         public void Should_Test_ChooseMontysDoor()
         {
             // arrange
-            var doors = new Doors(new StubInput());
+            var doors = new Doors(new StubInput(), new StubOutput());
             var prizes = doors.InitialiseDoors();
             var chosenDoor = 1;
             // act
@@ -74,7 +75,7 @@ namespace tests.MontyHall
         public void Should_Test_SwitchDoor(int chosenDoor, int montysDoor, int expected)
         {
             // arrange
-            var doors = new Doors(new StubInput());
+            var doors = new Doors(new StubInput(), new StubOutput());
             // act
             var result = doors.UnopenedDoor(chosenDoor, montysDoor);
             // assert
@@ -83,7 +84,7 @@ namespace tests.MontyHall
         [Theory]
         [InlineData(new [] {0,1}, "y", true)]
         [InlineData(new [] {0,1}, "n", false)]
-        public void Should_Test_UserInput_ChosenDoor_DecideWhichDoor(int[] door, string userInput, bool expected)
+        public void Should_Test_UserInput_DecideWhichDoor(int[] door, string userInput, bool expected)
         {
             // arrange
             // arrange
@@ -91,11 +92,12 @@ namespace tests.MontyHall
             moqInput
                 .Setup(_ => _.ReadLine())
                 .Returns(userInput);
-            var doors = new Doors(moqInput.Object);
+            var doors = new Doors(moqInput.Object, new StubOutput());
             // act
             var result = doors.DecideWhichDoor(door[0], door[1]);
             // assert
             Assert.Equal(expected, result);
         }
+        
     }
 }
