@@ -86,11 +86,15 @@ namespace tests.MontyHall
         public void Should_Test_UserInput_ChosenDoor_DecideWhichDoor(int[] door, string userInput, bool expected)
         {
             // arrange
+            var moqInput = new Mock<IInput>();
+            moqInput
+                .Setup(_ => _.ReadLine())
+                .Returns(userInput);
             var decideDoors = new DecideDoors(new StubInput());
             // act
-            var result = decideDoors.DecideWhichDoor(door[0], door[1], userInput);
+            var result = decideDoors.DecideWhichDoor(door[0], door[1],  moqInput.Object.ReadLine());
             // assert
-            Assert.Equal(result, expected);
+            Assert.Equal(expected, result);
         }
     }
 }
