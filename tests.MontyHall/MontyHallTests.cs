@@ -48,7 +48,6 @@ namespace tests.MontyHall
         public void Should_Test_If_Car_Chosen(int chosenDoor, bool expected)
         {
             // arrange
-            //var doorOutput =  new StubOutput();
             var doors = new Doors(new StubInput(), new StubOutput());
             var prizes = doors.InitialiseDoors();
             // act
@@ -84,7 +83,7 @@ namespace tests.MontyHall
         [Theory]
         [InlineData(new [] {0,1}, "y", true)]
         [InlineData(new [] {0,1}, "n", false)]
-        public void Should_Test_UserInput_DecideWhichDoor(int[] door, string userInput, bool expected)
+        public void Should_Test_DecideWhichDoor(int[] door, string userInput, bool expected)
         {
             // arrange
             // arrange
@@ -98,6 +97,15 @@ namespace tests.MontyHall
             // assert
             Assert.Equal(expected, result);
         }
-        
+        [Fact]
+        public void Should_Test_OutputToConsole()
+        {
+            // arrange
+            var doors = new Doors(new StubInput(), new StubOutput());
+            // act
+            var result = doors.PrintToConsole();
+            // assert
+            Assert.NotNull(result.ToString());
+        }
     }
 }
