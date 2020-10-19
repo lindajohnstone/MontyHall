@@ -64,14 +64,10 @@ namespace MontyHall
 
         public bool DecideWhichDoor(int chosenDoor, int switchDoor)
         {
-            PrintToConsole("Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.");
+            _output.WriteLine("Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.");
             var userInput = _input.ReadLine();
             if (userInput == "y") return true; 
             return false; 
-        }
-        public void PrintToConsole(string message)
-        {
-            _output.WriteLine(message);
         }
     }
 }

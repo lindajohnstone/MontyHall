@@ -24,13 +24,13 @@ namespace tests.MontyHall
         public void Should_Test_OutputToConsole()
         {
             // arrange
-            var doorOutput = new StubOutput();
-            var doors = new Doors(new StubInput(), doorOutput);
-            doorOutput._writeLine = "Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.";
+            var message = "Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.";
+            var output = new StubOutput();
+            var doors = new Doors(new StubInput(), output);
             // act
-            doors.PrintToConsole(doorOutput._writeLine);
+            doors.DecideWhichDoor(0,1);
             // assert
-            Assert.Equal(doorOutput._writeLine, doorOutput.GetWriteLine());
+            Assert.Equal<string>(message, output.GetWriteLine());
         }
     }
 }
