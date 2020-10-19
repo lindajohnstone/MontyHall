@@ -7,7 +7,7 @@ namespace MontyHall
     {
         IBehindTheDoor[] prizes; 
         IInput _input;
-        private readonly IOutput _output;
+        IOutput _output;
 
         public Doors(IInput input, IOutput output)
         {
@@ -64,16 +64,14 @@ namespace MontyHall
 
         public bool DecideWhichDoor(int chosenDoor, int switchDoor)
         {
-            PrintToConsole();
+            PrintToConsole("Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.");
             var userInput = _input.ReadLine();
             if (userInput == "y") return true; 
-            return false;
+            return false; 
         }
-        public string PrintToConsole()
+        public void PrintToConsole(string message)
         {
-            _output.WriteLine("Would you like to keep your original door or switch to the unopened door? ");
-            _output.WriteLine("Enter 'y' to keep or 'n' to switch.");
-            return _output.ToString();
+            _output.WriteLine(message);
         }
     }
 }

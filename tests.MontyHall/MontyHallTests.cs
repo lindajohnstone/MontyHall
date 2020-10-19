@@ -101,11 +101,13 @@ namespace tests.MontyHall
         public void Should_Test_OutputToConsole()
         {
             // arrange
-            var doors = new Doors(new StubInput(), new StubOutput());
+            var doorOutput = new StubOutput();
+            var doors = new Doors(new StubInput(), doorOutput);
+            doorOutput._writeLine = "Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.";
             // act
-            var result = doors.PrintToConsole();
+            doors.PrintToConsole(doorOutput._writeLine);
             // assert
-            Assert.NotNull(result.ToString());
+            Assert.Equal(doorOutput._writeLine, doorOutput.GetWriteLine());
         }
     }
 }

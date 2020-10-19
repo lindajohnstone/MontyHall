@@ -4,7 +4,7 @@ namespace MontyHall
 {
     public class StubOutput : IOutput
     {
-        private string _writeLine;
+        public string _writeLine;
         private string _write;
         public void WriteLine(string v)
         {
