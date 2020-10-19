@@ -109,5 +109,20 @@ namespace tests.MontyHall
             // assert
             Assert.Equal(doorOutput._writeLine, doorOutput.GetWriteLine());
         }
+        [Theory]
+        [InlineData("y", true)]
+        [InlineData("n", true)]
+        [InlineData("1", false)]
+        [InlineData("a", false)]
+        public void Should_Validate_DecideDoors_Input(string input, bool expected)
+        {
+            // arrange
+            IInput doorInput = new StubInput().WithReadLine(input);
+            var userInput = new DoorInput(doorInput);
+            // act
+            var result = userInput.ValidateInput(input);
+            // assert
+            Assert.Equal(expected, result);
+        }
     }
 }
