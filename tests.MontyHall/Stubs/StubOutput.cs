@@ -7,8 +7,6 @@ namespace tests.MontyHall
 {
     public class StubOutput : IOutput
     {
-        private string _writeLine;
-        private string _write;
         Queue<string> _queue;
         public StubOutput()
         {
@@ -21,7 +19,7 @@ namespace tests.MontyHall
 
         public void Write(string v)
         {
-            Console.Write(v);
+            _queue.Enqueue(v);
         }
 
         public string GetWriteLine() 
@@ -30,7 +28,7 @@ namespace tests.MontyHall
         }
         public string GetWrite() 
         {
-            return _write;
+            return _queue.Dequeue();
         }
     }
 }

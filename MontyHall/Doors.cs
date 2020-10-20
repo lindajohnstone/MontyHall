@@ -69,5 +69,19 @@ namespace MontyHall
             if (userInput == "y") return true; 
             return false; 
         }
+
+        public void RevealPrize(bool prize)
+        {
+            var message = "";
+            if (prize) 
+            {
+                message = "Congratulations! You have won the Car!!!";
+            }
+            else
+            {
+                message = "Better luck next time. You have won a Goat.";
+            }
+            _output.WriteLine(message);
+        }
     }
 }

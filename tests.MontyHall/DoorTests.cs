@@ -72,5 +72,18 @@ namespace tests.MontyHall
             // assert
             Assert.Equal(expected, result);
         }
+        [Theory]
+        [InlineData(true, "Congratulations! You have won the Car!!!")]
+        [InlineData(false, "Better luck next time. You have won a Goat.")]
+        public void Should_Test_RevealDoor(bool prize, string expected)
+        {
+            // a range
+            var output = new StubOutput();
+            var doors = new Doors(new StubInput(), output);
+            // act
+            doors.RevealPrize(prize);
+            // assert
+            Assert.Equal<string>(expected, output.GetWriteLine()); 
+        }
     }
 }
