@@ -16,6 +16,22 @@ namespace MontyHall
         }
         private int min = 0;
         private int max = 3;
+        private int chosenDoor;
+        private int montysDoor;
+        private int unopenedDoor;
+        private bool prize;
+
+        public void Play()
+        {
+            InitialiseDoors();
+            ChoosePlayerDoor();
+            IsPrize(chosenDoor);
+            ChooseMontysDoor(chosenDoor);
+            UnopenedDoor(chosenDoor, montysDoor);
+            //DecideWhichDoor(chosenDoor, unopenedDoor);
+            OpenDoor();
+            RevealPrize(prize);
+        }
         public IBehindTheDoor[] InitialiseDoors()
         {
             prizes = new IBehindTheDoor[] {new Car(), new Goat(), new Goat()};
@@ -25,7 +41,7 @@ namespace MontyHall
         public int ChoosePlayerDoor()
         {
             Random rand = new Random();
-            var chosenDoor = rand.Next(min, max);
+            chosenDoor = rand.Next(min, max);
             return chosenDoor;
         }
 
@@ -35,8 +51,7 @@ namespace MontyHall
         }
 
         public int ChooseMontysDoor(int chosenDoor)
-        {
-            var montysDoor = 0; 
+        { 
             for (int i = 0; i < prizes.Length; i++)
             {
                 if (i != chosenDoor || !prizes[i].IsPrize())
@@ -50,7 +65,6 @@ namespace MontyHall
 
         public int UnopenedDoor(int chosenDoor, int montysDoor)
         {
-            var unopenedDoor = 0; 
             for (int i = 0; i < max; i++)
             {
                 if (i != chosenDoor && i != montysDoor)
@@ -61,18 +75,37 @@ namespace MontyHall
             }
             return unopenedDoor;
         }
-
-        public bool DecideWhichDoor(int chosenDoor, int switchDoor)
+        private void PrintToConsole(string message)
         {
-            _output.WriteLine("Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.");
+            _output.WriteLine(message);
+        }
+
+        public bool DecideWhichDoor(int chosenDoor, int unopenedDoor)
+        {
+            var doorChoice = false;
+            PrintToConsole("Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.");
             var userInput = _input.ReadLine();
-            if (userInput == "y") return true; 
-            return false; 
+            if (userInput == "y")
+            {
+                doorChoice = true;
+            } 
+            doorChoice = false;
+            return doorChoice; 
         }
 
         public void RevealPrize(bool prize)
         {
             var message = "";
+            
+            /* if results from DecideDoors is true message
+            
+            {
+                message = "Congratulations! You have won the Car!!!";
+            }
+            else
+            {
+                message = "Better luck next time. You have won a Goat.";
+            }*/
             if (prize) 
             {
                 message = "Congratulations! You have won the Car!!!";
@@ -82,6 +115,22 @@ namespace MontyHall
                 message = "Better luck next time. You have won a Goat.";
             }
             _output.WriteLine(message);
+        }
+
+        public bool OpenDoor()
+        {
+            // call decidewhichdoor for user choice 
+            // if true: isprize(chosendoor)
+            // if false: isprize(unopeneddoor)
+            // bool result
+            var doorChoice = 0;
+            
+            if (DecideWhichDoor(chosenDoor, unopenedDoor))
+            {
+                doorChoice = chosenDoor; 
+            }
+            doorChoice = unopenedDoor;
+            return IsPrize(doorChoice);
         }
     }
 }
