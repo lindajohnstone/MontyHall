@@ -89,7 +89,9 @@ namespace MontyHall
             {
                 doorChoice = true;
             } 
-            doorChoice = false;
+            {
+               doorChoice = false; 
+            }
             return doorChoice; 
         }
 
