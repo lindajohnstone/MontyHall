@@ -19,7 +19,7 @@ namespace MontyHall
         private int chosenDoor;
         private int montysDoor;
         private int unopenedDoor;
-        private bool prize;
+        private bool doorChoice;
 
         public void Play()
         {
@@ -28,9 +28,8 @@ namespace MontyHall
             IsPrize(chosenDoor);
             ChooseMontysDoor(chosenDoor);
             UnopenedDoor(chosenDoor, montysDoor);
-            //DecideWhichDoor(chosenDoor, unopenedDoor);
             OpenDoor();
-            RevealPrize(prize);
+            RevealPrize(doorChoice);
         }
         public IBehindTheDoor[] InitialiseDoors()
         {
@@ -82,15 +81,15 @@ namespace MontyHall
 
         public bool DecideWhichDoor(int chosenDoor, int unopenedDoor)
         {
-            var doorChoice = false;
             PrintToConsole("Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.");
             var userInput = _input.ReadLine();
-            if (userInput == "y")
+            if (userInput == "n")
             {
-                doorChoice = true;
+                doorChoice = false;
             } 
+            else
             {
-               doorChoice = false; 
+               doorChoice = true; 
             }
             return doorChoice; 
         }
