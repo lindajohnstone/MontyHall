@@ -30,7 +30,7 @@ namespace tests.MontyHall
             // act
             doors.DecideWhichDoor(0,1);
             // assert
-            Assert.Equal<string>(message, output.GetWriteLine());
+            Assert.Equal(message, output.GetWriteLine());
         }
     }
 }

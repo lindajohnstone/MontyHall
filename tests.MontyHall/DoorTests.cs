@@ -46,7 +46,7 @@ namespace tests.MontyHall
         [InlineData(0, 1, 2)]
         [InlineData(0, 2, 1)]
         [InlineData(2, 0, 1)]
-        public void Should_Test_SwitchDoor(int chosenDoor, int montysDoor, int expected)
+        public void Should_Test_UnopenedDoor(int chosenDoor, int montysDoor, int expected)
         {
             // arrange
             var doors = new Doors(new StubInput(), new StubOutput());
@@ -61,7 +61,6 @@ namespace tests.MontyHall
         public void Should_Test_DecideWhichDoor(int[] door, string userInput, bool expected)
         {
             // arrange
-            // arrange
             var moqInput = new Mock<IInput>();
             moqInput
                 .Setup(_ => _.ReadLine())
@@ -72,18 +71,38 @@ namespace tests.MontyHall
             // assert
             Assert.Equal(expected, result);
         }
-        [Theory]
-        [InlineData(true, "Congratulations! You have won the Car!!!")]
-        [InlineData(false, "Better luck next time. You have won a Goat.")]
-        public void Should_Test_RevealDoor(bool prize, string expected)
+        [Fact]
+        public void Should_Test_OpenDoor()
         {
-            // a range
-            var output = new StubOutput();
-            var doors = new Doors(new StubInput(), output);
+            // arrange
+            var doors = new Doors(new StubInput(), new StubOutput());
+            doors.InitialiseDoors();
             // act
-            doors.RevealPrize(prize);
+            var result = doors.OpenDoor();
             // assert
-            Assert.Equal<string>(expected, output.GetWriteLine()); 
+            Assert.True(result);
         }
+        [Fact]
+        public void Should_Test_RevealDoor()
+        {
+            // arrange
+            var doors = new Doors(new StubInput(), new StubOutput());
+            // act
+           // doors.RevealPrize();
+            // assert
+            
+        }
+        [Fact]
+        public void Should_Test_ChoosePlayerDoor()
+        {
+            // arrange
+            var doors = new Doors(new StubInput(), new StubOutput());
+            // act
+            var result = doors.ChoosePlayerDoor();
+            // assert
+            Assert.InRange(result, 0, 2);
+            Assert.IsType(typeof(System.Int32), result);
+        }
+        
     }
 }

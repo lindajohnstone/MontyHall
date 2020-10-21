@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace MontyHall
 {
@@ -6,7 +7,10 @@ namespace MontyHall
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var input = new ConsoleInput();
+            var output = new ConsoleOutput();
+            Doors doors = new Doors(input, output);
+            doors.Play();
         }
     }
 }
