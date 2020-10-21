@@ -83,16 +83,6 @@ namespace tests.MontyHall
             Assert.True(result);
         }
         [Fact]
-        public void Should_Test_RevealDoor()
-        {
-            // arrange
-            var doors = new Doors(new StubInput(), new StubOutput());
-            // act
-           // doors.RevealPrize();
-            // assert
-            
-        }
-        [Fact]
         public void Should_Test_ChoosePlayerDoor()
         {
             // arrange
@@ -101,7 +91,6 @@ namespace tests.MontyHall
             var result = doors.ChoosePlayerDoor();
             // assert
             Assert.InRange(result, 0, 2);
-            Assert.IsType(typeof(System.Int32), result);
         }
         [Theory]
         [InlineData(true, "Congratulations! You have won the Car!!!")]
@@ -114,7 +103,7 @@ namespace tests.MontyHall
             // act
             doors.RevealPrize(prize);
             // assert
-            Assert.Equal<string>(expected, output.GetWriteLine()); 
+            Assert.Equal(expected, output.GetWriteLine()); 
         }
     }
 }
