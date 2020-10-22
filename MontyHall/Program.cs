@@ -10,7 +10,8 @@ namespace MontyHall
             var input = new ConsoleInput();
             var output = new ConsoleOutput();
             Doors doors = new Doors(input, output);
-            doors.Play();
+            //doors.Play();
+            doors.KeepDoor();
         }
     }
 }
