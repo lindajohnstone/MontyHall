@@ -20,12 +20,29 @@ namespace MontyHall
         private int montysDoor;
         private int unopenedDoor;
         private bool doorChoice;
-
+        private int count;
+        private int winCount;
+        private int loseCount;
+        public void KeepDoor()
+        {
+            winCount = 0;
+            loseCount = 0;
+            count = 0;
+            while(count < 1000)
+            {
+                InitialiseDoors();
+                ChoosePlayerDoor();
+                if(IsPrize(chosenDoor)) winCount++;
+                if(!IsPrize(chosenDoor)) loseCount++;
+                count++;
+            }
+            var message = string.Format("Total number of games = {0}. Total wins = {1}. Total losses = {2}", count, winCount, loseCount);
+            PrintToConsole(message);
+        }
         public void Play()
         {
             InitialiseDoors();
             ChoosePlayerDoor();
-            IsPrize(chosenDoor);
             ChooseMontysDoor(chosenDoor);
             UnopenedDoor(chosenDoor, montysDoor);
             OpenDoor();
@@ -83,55 +100,26 @@ namespace MontyHall
         {
             PrintToConsole("Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.");
             var userInput = _input.ReadLine();
-            if (userInput == "n")
-            {
-                doorChoice = false;
-            } 
-            else
-            {
-               doorChoice = true; 
-            }
+            if (userInput == "n") doorChoice = false;
+            if (userInput == "y") doorChoice = true; 
             return doorChoice; 
         }
 
         public void RevealPrize(bool prize)
         {
             var message = "";
-            
-            /* if results from DecideDoors is true message
-            
-            {
-                message = "Congratulations! You have won the Car!!!";
-            }
-            else
-            {
-                message = "Better luck next time. You have won a Goat.";
-            }*/
-            if (prize) 
-            {
-                message = "Congratulations! You have won the Car!!!";
-            }
-            else
-            {
-                message = "Better luck next time. You have won a Goat.";
-            }
-            _output.WriteLine(message);
+            if (prize) message = "Congratulations! You have won the Car!!!";
+            if (!prize) message = "Better luck next time. You have won a Goat.";
+            PrintToConsole(message);
         }
 
         public bool OpenDoor()
         {
-            // call decidewhichdoor for user choice 
-            // if true: isprize(chosendoor)
-            // if false: isprize(unopeneddoor)
-            // bool result
-            var doorChoice = 0;
-            
             if (DecideWhichDoor(chosenDoor, unopenedDoor))
             {
-                doorChoice = chosenDoor; 
+                return IsPrize(chosenDoor); 
             }
-            doorChoice = unopenedDoor;
-            return IsPrize(doorChoice);
+            return IsPrize(unopenedDoor);
         }
     }
 }

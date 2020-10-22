@@ -105,5 +105,16 @@ namespace tests.MontyHall
             // assert
             Assert.Equal(expected, output.GetWriteLine()); 
         }
+        [Fact]
+        public void Should_Test_KeepDoor_IsPrize_Count()
+        {
+            // arrange
+            var spyBehindTheDoor = new SpyBehindTheDoor();
+            //var doors = new Door
+            // act
+            
+            // assert
+            Assert.Equal(1000, spyBehindTheDoor.GetIsPrizeCount());
+        }
     }
 }
