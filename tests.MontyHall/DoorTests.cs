@@ -24,7 +24,7 @@ namespace tests.MontyHall
         {
             // arrange
             var doors = new Doors(new StubInput(), new StubOutput());
-            var prizes = doors.InitialiseDoors();
+            doors.InitialiseDoors();
             // act
             var result = doors.IsPrize(chosenDoor);
             // assert
@@ -35,7 +35,7 @@ namespace tests.MontyHall
         {
             // arrange
             var doors = new Doors(new StubInput(), new StubOutput());
-            var prizes = doors.InitialiseDoors();
+            doors.InitialiseDoors();
             var chosenDoor = 1;
             // act
             var result = doors.ChooseMontysDoor(chosenDoor);
@@ -104,17 +104,6 @@ namespace tests.MontyHall
             doors.RevealPrize(prize);
             // assert
             Assert.Equal(expected, output.GetWriteLine()); 
-        }
-        [Fact]
-        public void Should_Test_KeepDoor_IsPrize_Count()
-        {
-            // arrange
-            var spyBehindTheDoor = new SpyBehindTheDoor();
-            //var doors = new Door
-            // act
-            
-            // assert
-            Assert.Equal(1000, spyBehindTheDoor.GetIsPrizeCount());
         }
     }
 }

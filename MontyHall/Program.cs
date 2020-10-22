@@ -12,6 +12,7 @@ namespace MontyHall
             Doors doors = new Doors(input, output);
             //doors.Play();
             doors.KeepDoor();
+            doors.SwitchDoor();
         }
     }
 }
