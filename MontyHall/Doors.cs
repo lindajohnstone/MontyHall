@@ -50,8 +50,8 @@ namespace MontyHall
                 ChoosePlayerDoor();
                 ChooseMontysDoor(chosenDoor);
                 UnopenedDoor(chosenDoor, montysDoor);
-                if(IsPrize(unopenedDoor)) winCount++;
-                if(!IsPrize(unopenedDoor)) loseCount++;
+                if(IsPrize(chosenDoor)) loseCount++;
+                if(!IsPrize(chosenDoor)) winCount++;
                 count++;
             }
             var message = string.Format("Total number of games = {0}. Total wins = {1}. Total losses = {2}", count, winCount, loseCount);
@@ -136,10 +136,10 @@ namespace MontyHall
 
         public bool OpenDoor()
         {
-            /* if (DecideWhichDoor(chosenDoor, unopenedDoor))
+            if (DecideWhichDoor(chosenDoor, unopenedDoor))
             {
                 return IsPrize(chosenDoor); 
-            } */
+            }
             return IsPrize(unopenedDoor);
         }
     }
