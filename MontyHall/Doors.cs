@@ -39,6 +39,26 @@ namespace MontyHall
             var message = string.Format("Total number of games = {0}. Total wins = {1}. Total losses = {2}", count, winCount, loseCount);
             PrintToConsole(message);
         }
+        public void SwitchDoor()
+        {
+            winCount = 0;
+            loseCount = 0;
+            count = 0;
+            while(count < 1000)
+            {  
+                InitialiseDoors();
+                ChoosePlayerDoor();
+                ChooseMontysDoor(chosenDoor);
+                UnopenedDoor(chosenDoor, montysDoor);
+                if(IsPrize(chosenDoor)) loseCount++;
+                if(!IsPrize(chosenDoor)) winCount++;
+                count++;
+            }
+            var message = string.Format("Total number of games = {0}. Total wins = {1}. Total losses = {2}", count, winCount, loseCount);
+            PrintToConsole(message); 
+        }
+
+
         public void Play()
         {
             InitialiseDoors();
@@ -48,10 +68,11 @@ namespace MontyHall
             OpenDoor();
             RevealPrize(doorChoice);
         }
-        public IBehindTheDoor[] InitialiseDoors()
+
+        public void InitialiseDoors()
         {
             prizes = new IBehindTheDoor[] {new Car(), new Goat(), new Goat()};
-            return prizes.OrderBy(_ => Guid.NewGuid()).ToArray();
+            prizes.OrderBy(_ => Guid.NewGuid()).ToArray();
         }
 
         public int ChoosePlayerDoor()
