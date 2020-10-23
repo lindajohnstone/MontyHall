@@ -26,7 +26,7 @@ namespace tests.MontyHall
             // arrange
             var message = "Would you like to keep your original door or switch to the unopened door? Enter 'y' to keep or 'n' to switch.";
             var output = new StubOutput();
-            var doors = new Doors(new StubInput(), output);
+            var doors = new Doors(new StubInput(), output, new PercentageCalculator());
             // act
             doors.DecideWhichDoor(0,1);
             // assert

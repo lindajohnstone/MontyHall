@@ -23,7 +23,7 @@ namespace tests.MontyHall
         public void Should_Test_If_Car_Chosen(int chosenDoor, bool expected)
         {
             // arrange
-            var doors = new Doors(new StubInput(), new StubOutput());
+            var doors = new Doors(new StubInput(), new StubOutput(), new PercentageCalculator());
             doors.InitialiseDoors();
             // act
             var result = doors.IsPrize(chosenDoor);
@@ -34,7 +34,7 @@ namespace tests.MontyHall
         public void Should_Test_ChooseMontysDoor()
         {
             // arrange
-            var doors = new Doors(new StubInput(), new StubOutput());
+            var doors = new Doors(new StubInput(), new StubOutput(), new PercentageCalculator());
             doors.InitialiseDoors();
             var chosenDoor = 1;
             // act
@@ -49,7 +49,7 @@ namespace tests.MontyHall
         public void Should_Test_UnopenedDoor(int chosenDoor, int montysDoor, int expected)
         {
             // arrange
-            var doors = new Doors(new StubInput(), new StubOutput());
+            var doors = new Doors(new StubInput(), new StubOutput(), new PercentageCalculator());
             // act
             var result = doors.UnopenedDoor(chosenDoor, montysDoor);
             // assert
@@ -65,7 +65,7 @@ namespace tests.MontyHall
             moqInput
                 .Setup(_ => _.ReadLine())
                 .Returns(userInput);
-            var doors = new Doors(moqInput.Object, new StubOutput());
+            var doors = new Doors(moqInput.Object, new StubOutput(), new PercentageCalculator());
             // act
             var result = doors.DecideWhichDoor(door[0], door[1]);
             // assert
@@ -75,7 +75,7 @@ namespace tests.MontyHall
         public void Should_Test_OpenDoor()
         {
             // arrange
-            var doors = new Doors(new StubInput(), new StubOutput());
+            var doors = new Doors(new StubInput(), new StubOutput(), new PercentageCalculator());
             doors.InitialiseDoors();
             // act
             var result = doors.OpenDoor();
@@ -86,7 +86,7 @@ namespace tests.MontyHall
         public void Should_Test_ChoosePlayerDoor()
         {
             // arrange
-            var doors = new Doors(new StubInput(), new StubOutput());
+            var doors = new Doors(new StubInput(), new StubOutput(), new PercentageCalculator());
             // act
             var result = doors.ChoosePlayerDoor();
             // assert
@@ -99,7 +99,7 @@ namespace tests.MontyHall
         {
             // a range
             var output = new StubOutput();
-            var doors = new Doors(new StubInput(), output);
+            var doors = new Doors(new StubInput(), output, new PercentageCalculator());
             // act
             doors.RevealPrize(prize);
             // assert

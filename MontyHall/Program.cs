@@ -9,10 +9,9 @@ namespace MontyHall
         {
             var input = new ConsoleInput();
             var output = new ConsoleOutput();
-            Doors doors = new Doors(input, output);
-            //doors.Play();
-            doors.KeepDoor();
-            doors.SwitchDoor();
+            var calculator = new PercentageCalculator();
+            Doors doors = new Doors(input, output, calculator);
+            doors.RunSimulation();
         }
     }
 }
