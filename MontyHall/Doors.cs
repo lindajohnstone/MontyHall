@@ -5,10 +5,11 @@ namespace MontyHall
 {
     public class Doors
     {
-        IBehindTheDoor[] prizes; 
+        IBehindTheDoor[] prizes = new IBehindTheDoor[] {new Car(), new Goat(), new Goat()}; 
         IInput _input;
         IOutput _output;
         PercentageCalculator _calculator;
+        Random rand = new Random();
         public Doors(IInput input, IOutput output, PercentageCalculator calculator)
         {
             _input = input;
@@ -89,13 +90,13 @@ namespace MontyHall
         }
         public IBehindTheDoor[] InitialiseDoors()
         {
-            prizes = new IBehindTheDoor[] {new Car(), new Goat(), new Goat()};
+            //prizes = new IBehindTheDoor[] {new Car(), new Goat(), new Goat()};
             return prizes.OrderBy(_ => Guid.NewGuid()).ToArray();
         }
 
         public int ChoosePlayerDoor()
         {
-            Random rand = new Random();
+            //Random rand = new Random();
             chosenDoor = rand.Next(min, max);
             return chosenDoor;
         }
