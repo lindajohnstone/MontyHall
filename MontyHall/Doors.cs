@@ -90,13 +90,11 @@ namespace MontyHall
         }
         public IBehindTheDoor[] InitialiseDoors()
         {
-            //prizes = new IBehindTheDoor[] {new Car(), new Goat(), new Goat()};
             return prizes.OrderBy(_ => Guid.NewGuid()).ToArray();
         }
 
         public int ChoosePlayerDoor()
         {
-            //Random rand = new Random();
             chosenDoor = rand.Next(min, max);
             return chosenDoor;
         }
